@@ -27,14 +27,12 @@ export function QuestionList({ questions, onQuestionsChange, className }: Questi
     const { active, over } = event
 
     if (active.id !== over.id) {
-      onQuestionsChange(prev => {
-        const oldIndex = prev.findIndex(q => q.id === active.id)
-        const newIndex = prev.findIndex(q => q.id === over.id)
-        
-        return arrayMove(prev, oldIndex, newIndex)
-      })
+      const oldIndex = questions.findIndex(q => q.id === active.id)
+      const newIndex = questions.findIndex(q => q.id === over.id)
+      
+      onQuestionsChange(arrayMove(questions, oldIndex, newIndex))
     }
-  }, [onQuestionsChange])
+  }, [questions, onQuestionsChange])
 
   const addQuestion = React.useCallback((type: string = 'single_choice') => {
     const newQuestion: QuestionFormData & { id: string } = {
@@ -50,35 +48,31 @@ export function QuestionList({ questions, onQuestionsChange, className }: Questi
                 {} as any
     }
 
-    onQuestionsChange(prev => [...prev, newQuestion])
-  }, [onQuestionsChange])
+    onQuestionsChange([...questions, newQuestion])
+  }, [questions, onQuestionsChange])
 
   const updateQuestion = React.useCallback((index: number, data: QuestionFormData) => {
-    onQuestionsChange(prev => {
-      const newQuestions = [...prev]
-      newQuestions[index] = { ...newQuestions[index], ...data }
-      return newQuestions
-    })
-  }, [onQuestionsChange])
+    const newQuestions = [...questions]
+    newQuestions[index] = { ...newQuestions[index], ...data }
+    onQuestionsChange(newQuestions)
+  }, [questions, onQuestionsChange])
 
   const deleteQuestion = React.useCallback((index: number) => {
-    onQuestionsChange(prev => prev.filter((_, i) => i !== index))
-  }, [onQuestionsChange])
+    onQuestionsChange(questions.filter((_, i) => i !== index))
+  }, [questions, onQuestionsChange])
 
   const duplicateQuestion = React.useCallback((index: number) => {
-    onQuestionsChange(prev => {
-      const questionToDuplicate = prev[index]
-      const duplicatedQuestion: QuestionFormData & { id: string } = {
-        ...questionToDuplicate,
-        id: `question-${Date.now()}`,
-        text: `${questionToDuplicate.text} (コピー)`
-      }
+    const questionToDuplicate = questions[index]
+    const duplicatedQuestion: QuestionFormData & { id: string } = {
+      ...questionToDuplicate,
+      id: `question-${Date.now()}`,
+      text: `${questionToDuplicate.text} (コピー)`
+    }
 
-      const newQuestions = [...prev]
-      newQuestions.splice(index + 1, 0, duplicatedQuestion)
-      return newQuestions
-    })
-  }, [onQuestionsChange])
+    const newQuestions = [...questions]
+    newQuestions.splice(index + 1, 0, duplicatedQuestion)
+    onQuestionsChange(newQuestions)
+  }, [questions, onQuestionsChange])
 
   return (
     <div className={className}>

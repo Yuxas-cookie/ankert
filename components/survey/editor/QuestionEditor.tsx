@@ -72,7 +72,7 @@ export function QuestionEditor({
   stableOnUpdate.current = onUpdate
 
   // Notify parent of changes - prevent infinite loops by comparing previous data
-  const prevDataRef = React.useRef<QuestionFormData>()
+  const prevDataRef = React.useRef<QuestionFormData | undefined>(undefined)
   React.useEffect(() => {
     const currentData = JSON.stringify(watchedData)
     const prevData = JSON.stringify(prevDataRef.current)

@@ -78,7 +78,7 @@ export default function SurveyResponsePage() {
       console.log('[Respond Page] Transformed survey:', {
         surveyId: transformedSurvey.id,
         questionsCount: transformedSurvey.questions.length,
-        questions: transformedSurvey.questions.map(q => ({
+        questions: transformedSurvey.questions.map((q: any) => ({
           id: q.id,
           type: q.question_type,
           text: q.question_text,

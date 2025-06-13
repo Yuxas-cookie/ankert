@@ -204,7 +204,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <CosmicCard variant="galaxy">
+        <CosmicCard variant="aurora">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Target className="w-5 h-5" />
@@ -229,7 +229,7 @@ export const AnalyticsOverview: React.FC<AnalyticsOverviewProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
-        <CosmicCard variant="cosmic">
+        <CosmicCard variant="titanium">
           <CardHeader>
             <CardTitle>質問パフォーマンス</CardTitle>
           </CardHeader>

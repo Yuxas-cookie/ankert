@@ -230,13 +230,13 @@ export const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
                   <div>
                     <Label>開始日</Label>
                     <DateTimePicker
-                      value={filters.dateRange.start}
+                      value={filters.dateRange.start || undefined}
                       onChange={(date) => {
                         const newFilters = {
                           ...filters,
                           dateRange: {
                             ...filters.dateRange,
-                            start: date
+                            start: date ?? null
                           }
                         };
                         setFilters(newFilters);
@@ -248,13 +248,13 @@ export const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
                   <div>
                     <Label>終了日</Label>
                     <DateTimePicker
-                      value={filters.dateRange.end}
+                      value={filters.dateRange.end || undefined}
                       onChange={(date) => {
                         const newFilters = {
                           ...filters,
                           dateRange: {
                             ...filters.dateRange,
-                            end: date
+                            end: date ?? null
                           }
                         };
                         setFilters(newFilters);
