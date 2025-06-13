@@ -43,8 +43,8 @@ export default function AuthDebugPage() {
       try {
         // セッション情報を取得
         const { data: { session }, error: sessionError } = await supabase.auth.getSession()
-        info.session = session
-        info.user = session?.user
+        info.session = session || null
+        info.user = session?.user || null
         info.authStatus = session ? 'authenticated' : 'not authenticated'
         
         if (sessionError) {
