@@ -1,0 +1,47 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Application metrics
+  - job_name: 'survey-app'
+    static_configs:
+      - targets: ['survey-app:3000']
+    metrics_path: '/api/metrics'
+    scrape_interval: 30s
+
+  # Health check monitoring
+  - job_name: 'survey-app-health'
+    static_configs:
+      - targets: ['survey-app:3000']
+    metrics_path: '/api/health'
+    scrape_interval: 10s
+
+  # Redis metrics
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+
+  # Nginx metrics (if nginx-prometheus-exporter is installed)
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:9113']
+
+  # Node exporter for system metrics
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "alert_rules.yml"

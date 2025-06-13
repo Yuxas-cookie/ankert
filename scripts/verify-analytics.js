@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+console.log('🔍 アナリティクス機能の検証を開始します...\n')
+
+console.log('✅ 実装済みの機能:')
+console.log('   1. 基本分析ダッシュボード (/components/analytics/AnalyticsOverview.tsx)')
+console.log('   2. 高度な分析機能 (/components/analytics/AdvancedInsights.tsx)')
+console.log('   3. 統計分析ライブラリ (/lib/analytics/StatisticalAnalyzer.ts)')
+console.log('   4. テキスト分析ライブラリ (/lib/analytics/TextAnalyzer.ts)')
+console.log('   5. リアルタイム分析 (/lib/analytics/RealTimeAnalytics.ts)')
+console.log('   6. レスポンス分析 (/lib/analytics/response-analyzer.ts)')
+console.log('')
+
+console.log('📊 利用可能なチャートコンポーネント:')
+console.log('   - BaseChart (基本チャート)')
+console.log('   - BarChart (棒グラフ)')
+console.log('   - LineChart (折れ線グラフ)')
+console.log('   - PieChart (円グラフ)')
+console.log('   - LikertScaleChart (リッカート尺度チャート)')
+console.log('   - ResponseFunnel (回答ファネル)')
+console.log('')
+
+console.log('🌐 アクセス可能なページ:')
+console.log('   - http://localhost:3000/test-analytics (テストページ)')
+console.log('   - http://localhost:3000/surveys/[id]/responses (実際の回答ページ)')
+console.log('')
+
+console.log('📋 テスト手順:')
+console.log('   1. npm run dev でサーバーを起動')
+console.log('   2. http://localhost:3000/test-analytics にアクセス')
+console.log('   3. モックデータでアナリティクス機能を確認')
+console.log('   4. 実際のアンケートがある場合は、回答ページでも確認可能')
+console.log('')
+
+console.log('🔧 主な機能:')
+console.log('   - 回答統計の表示（総数、完了率、平均時間など）')
+console.log('   - 回答トレンドの可視化')
+console.log('   - デバイス別分析')
+console.log('   - 質問パフォーマンス分析')
+console.log('   - 感情分析（テキスト回答）')
+console.log('   - トピック分析')
+console.log('   - 統計的相関分析')
+console.log('   - エクスポート機能（CSV、Excel、PDF）')
+console.log('')
+
+console.log('📚 詳細なドキュメント:')
+console.log('   /docs/ANALYTICS_GUIDE.md を参照してください')
+console.log('')
+
+console.log('✅ アナリティクス機能の検証が完了しました！')

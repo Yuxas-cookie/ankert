@@ -1,0 +1,550 @@
+import { BrandingConfig } from '@/types/charts';
+
+export interface BrandProfile {
+  id: string;
+  name: string;
+  description?: string;
+  branding: BrandingConfig;
+  isDefault: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ColorPalette {
+  name: string;
+  primary: string;
+  secondary: string;
+  accent?: string;
+  success: string;
+  warning: string;
+  error: string;
+  neutral: string[];
+}
+
+export interface TypographyConfig {
+  name: string;
+  headerFont: string;
+  bodyFont: string;
+  sizes: {
+    title: string;
+    heading: string;
+    body: string;
+    caption: string;
+  };
+  weights: {
+    light: number;
+    normal: number;
+    medium: number;
+    bold: number;
+  };
+}
+
+export class BrandingManager {
+  private brandProfiles: Map<string, BrandProfile> = new Map();
+  private colorPalettes: ColorPalette[] = [];
+  private typographyConfigs: TypographyConfig[] = [];
+
+  constructor() {
+    this.initializeDefaultPalettes();
+    this.initializeTypographyConfigs();
+    this.initializeDefaultBrandProfiles();
+  }
+
+  /**
+   * Initialize default color palettes
+   */
+  private initializeDefaultPalettes(): void {
+    this.colorPalettes = [
+      {
+        name: 'Professional Blue',
+        primary: '#3B82F6',
+        secondary: '#10B981',
+        accent: '#F59E0B',
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        neutral: ['#F8FAFC', '#E2E8F0', '#94A3B8', '#475569', '#1E293B']
+      },
+      {
+        name: 'Corporate Green',
+        primary: '#10B981',
+        secondary: '#3B82F6',
+        accent: '#8B5CF6',
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        neutral: ['#F0FDF4', '#DCFCE7', '#86EFAC', '#16A34A', '#14532D']
+      },
+      {
+        name: 'Modern Purple',
+        primary: '#8B5CF6',
+        secondary: '#EC4899',
+        accent: '#F59E0B',
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        neutral: ['#FAF5FF', '#E9D5FF', '#C084FC', '#7C3AED', '#581C87']
+      },
+      {
+        name: 'Warm Orange',
+        primary: '#F97316',
+        secondary: '#EF4444',
+        accent: '#8B5CF6',
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        neutral: ['#FFF7ED', '#FFEDD5', '#FB923C', '#EA580C', '#9A3412']
+      },
+      {
+        name: 'Cool Teal',
+        primary: '#0D9488',
+        secondary: '#06B6D4',
+        accent: '#F59E0B',
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        neutral: ['#F0FDFA', '#CCFBF1', '#5EEAD4', '#0F766E', '#134E4A']
+      },
+      {
+        name: 'Monochrome',
+        primary: '#1F2937',
+        secondary: '#6B7280',
+        accent: '#F59E0B',
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        neutral: ['#F9FAFB', '#E5E7EB', '#9CA3AF', '#4B5563', '#111827']
+      }
+    ];
+  }
+
+  /**
+   * Initialize typography configurations
+   */
+  private initializeTypographyConfigs(): void {
+    this.typographyConfigs = [
+      {
+        name: 'Professional',
+        headerFont: 'Inter',
+        bodyFont: 'Inter',
+        sizes: {
+          title: '24px',
+          heading: '18px',
+          body: '14px',
+          caption: '12px'
+        },
+        weights: {
+          light: 300,
+          normal: 400,
+          medium: 500,
+          bold: 700
+        }
+      },
+      {
+        name: 'Modern',
+        headerFont: 'Poppins',
+        bodyFont: 'Open Sans',
+        sizes: {
+          title: '28px',
+          heading: '20px',
+          body: '15px',
+          caption: '13px'
+        },
+        weights: {
+          light: 300,
+          normal: 400,
+          medium: 600,
+          bold: 700
+        }
+      },
+      {
+        name: 'Classic',
+        headerFont: 'Georgia',
+        bodyFont: 'Times New Roman',
+        sizes: {
+          title: '26px',
+          heading: '19px',
+          body: '14px',
+          caption: '12px'
+        },
+        weights: {
+          light: 300,
+          normal: 400,
+          medium: 500,
+          bold: 700
+        }
+      },
+      {
+        name: 'Tech',
+        headerFont: 'Roboto',
+        bodyFont: 'Source Sans Pro',
+        sizes: {
+          title: '24px',
+          heading: '18px',
+          body: '14px',
+          caption: '12px'
+        },
+        weights: {
+          light: 300,
+          normal: 400,
+          medium: 500,
+          bold: 700
+        }
+      }
+    ];
+  }
+
+  /**
+   * Initialize default brand profiles
+   */
+  private initializeDefaultBrandProfiles(): void {
+    // Default Corporate Profile
+    this.addBrandProfile({
+      name: 'Default Corporate',
+      description: 'Professional corporate branding',
+      branding: {
+        logo: '',
+        colors: {
+          primary: '#3B82F6',
+          secondary: '#10B981'
+        },
+        typography: {
+          headerFont: 'Inter',
+          bodyFont: 'Inter'
+        },
+        footer: 'Generated by Survey Analytics System'
+      },
+      isDefault: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    // Modern Tech Profile
+    this.addBrandProfile({
+      name: 'Modern Tech',
+      description: 'Contemporary technology company branding',
+      branding: {
+        logo: '',
+        colors: {
+          primary: '#8B5CF6',
+          secondary: '#EC4899'
+        },
+        typography: {
+          headerFont: 'Poppins',
+          bodyFont: 'Open Sans'
+        },
+        footer: 'Powered by Advanced Analytics'
+      },
+      isDefault: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    // Healthcare Profile
+    this.addBrandProfile({
+      name: 'Healthcare',
+      description: 'Healthcare and medical industry branding',
+      branding: {
+        logo: '',
+        colors: {
+          primary: '#10B981',
+          secondary: '#0D9488'
+        },
+        typography: {
+          headerFont: 'Inter',
+          bodyFont: 'Inter'
+        },
+        footer: 'Healthcare Analytics Report'
+      },
+      isDefault: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+  }
+
+  /**
+   * Get all brand profiles
+   */
+  getBrandProfiles(): BrandProfile[] {
+    return Array.from(this.brandProfiles.values()).sort((a, b) => {
+      if (a.isDefault && !b.isDefault) return -1;
+      if (!a.isDefault && b.isDefault) return 1;
+      return a.name.localeCompare(b.name);
+    });
+  }
+
+  /**
+   * Get brand profile by ID
+   */
+  getBrandProfile(id: string): BrandProfile | null {
+    return this.brandProfiles.get(id) || null;
+  }
+
+  /**
+   * Get default brand profile
+   */
+  getDefaultBrandProfile(): BrandProfile {
+    const defaultProfile = Array.from(this.brandProfiles.values())
+      .find(p => p.isDefault);
+    
+    if (!defaultProfile) {
+      throw new Error('No default brand profile found');
+    }
+    
+    return defaultProfile;
+  }
+
+  /**
+   * Add brand profile
+   */
+  addBrandProfile(profile: Omit<BrandProfile, 'id'> & { id?: string }): string {
+    const id = profile.id || this.generateProfileId();
+    const fullProfile: BrandProfile = {
+      ...profile,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    
+    this.brandProfiles.set(id, fullProfile);
+    return id;
+  }
+
+  /**
+   * Update brand profile
+   */
+  updateBrandProfile(id: string, updates: Partial<BrandProfile>): boolean {
+    const profile = this.brandProfiles.get(id);
+    if (!profile) return false;
+
+    const updatedProfile: BrandProfile = {
+      ...profile,
+      ...updates,
+      id, // Preserve original ID
+      updatedAt: new Date()
+    };
+
+    this.brandProfiles.set(id, updatedProfile);
+    return true;
+  }
+
+  /**
+   * Delete brand profile
+   */
+  deleteBrandProfile(id: string): boolean {
+    const profile = this.brandProfiles.get(id);
+    if (!profile || profile.isDefault) return false;
+
+    return this.brandProfiles.delete(id);
+  }
+
+  /**
+   * Get color palettes
+   */
+  getColorPalettes(): ColorPalette[] {
+    return this.colorPalettes;
+  }
+
+  /**
+   * Get typography configurations
+   */
+  getTypographyConfigs(): TypographyConfig[] {
+    return this.typographyConfigs;
+  }
+
+  /**
+   * Create custom branding configuration
+   */
+  createCustomBranding(options: {
+    colorPaletteName?: string;
+    typographyConfigName?: string;
+    customColors?: Partial<BrandingConfig['colors']>;
+    customTypography?: Partial<BrandingConfig['typography']>;
+    logo?: string;
+    footer?: string;
+  }): BrandingConfig {
+    let colors = { primary: '#3B82F6', secondary: '#10B981' };
+    let typography = { headerFont: 'Inter', bodyFont: 'Inter' };
+
+    // Apply color palette
+    if (options.colorPaletteName) {
+      const palette = this.colorPalettes.find(p => p.name === options.colorPaletteName);
+      if (palette) {
+        colors = {
+          primary: palette.primary,
+          secondary: palette.secondary
+        };
+      }
+    }
+
+    // Apply typography config
+    if (options.typographyConfigName) {
+      const typographyConfig = this.typographyConfigs.find(t => t.name === options.typographyConfigName);
+      if (typographyConfig) {
+        typography = {
+          headerFont: typographyConfig.headerFont,
+          bodyFont: typographyConfig.bodyFont
+        };
+      }
+    }
+
+    // Apply custom overrides
+    if (options.customColors) {
+      colors = { ...colors, ...options.customColors };
+    }
+
+    if (options.customTypography) {
+      typography = { ...typography, ...options.customTypography };
+    }
+
+    return {
+      logo: options.logo || '',
+      colors,
+      typography,
+      footer: options.footer || 'Generated by Survey Analytics System'
+    };
+  }
+
+  /**
+   * Generate CSS variables from branding config
+   */
+  generateCSSVariables(branding: BrandingConfig): string {
+    return `
+      :root {
+        --brand-primary: ${branding.colors.primary};
+        --brand-secondary: ${branding.colors.secondary};
+        --brand-header-font: ${branding.typography.headerFont};
+        --brand-body-font: ${branding.typography.bodyFont};
+      }
+    `;
+  }
+
+  /**
+   * Validate branding configuration
+   */
+  validateBranding(branding: Partial<BrandingConfig>): ValidationResult {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
+    // Color validation
+    if (branding.colors) {
+      if (!this.isValidColor(branding.colors.primary)) {
+        errors.push('Invalid primary color format');
+      }
+      if (!this.isValidColor(branding.colors.secondary)) {
+        errors.push('Invalid secondary color format');
+      }
+      
+      // Check color contrast
+      if (branding.colors.primary && branding.colors.secondary) {
+        const contrast = this.calculateColorContrast(
+          branding.colors.primary, 
+          branding.colors.secondary
+        );
+        if (contrast < 3) {
+          warnings.push('Low contrast between primary and secondary colors');
+        }
+      }
+    }
+
+    // Typography validation
+    if (branding.typography) {
+      if (!branding.typography.headerFont) {
+        warnings.push('Header font not specified');
+      }
+      if (!branding.typography.bodyFont) {
+        warnings.push('Body font not specified');
+      }
+    }
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings
+    };
+  }
+
+  /**
+   * Preview branding configuration
+   */
+  generateBrandingPreview(branding: BrandingConfig): BrandingPreview {
+    return {
+      colorSwatches: {
+        primary: branding.colors.primary,
+        secondary: branding.colors.secondary
+      },
+      fontSamples: {
+        header: {
+          font: branding.typography.headerFont,
+          sample: 'Survey Analytics Report'
+        },
+        body: {
+          font: branding.typography.bodyFont,
+          sample: 'This is a sample of body text using the selected font family.'
+        }
+      },
+      logoPlacement: branding.logo || null,
+      footer: branding.footer || ''
+    };
+  }
+
+  // Private helper methods
+
+  private generateProfileId(): string {
+    return `brand_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  private isValidColor(color: string): boolean {
+    // Basic hex color validation
+    return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
+  }
+
+  private calculateColorContrast(color1: string, color2: string): number {
+    // Simplified contrast calculation
+    // In a real implementation, you'd use proper color contrast algorithms
+    const hex1 = color1.replace('#', '');
+    const hex2 = color2.replace('#', '');
+    
+    const r1 = parseInt(hex1.substr(0, 2), 16);
+    const g1 = parseInt(hex1.substr(2, 2), 16);
+    const b1 = parseInt(hex1.substr(4, 2), 16);
+    
+    const r2 = parseInt(hex2.substr(0, 2), 16);
+    const g2 = parseInt(hex2.substr(2, 2), 16);
+    const b2 = parseInt(hex2.substr(4, 2), 16);
+    
+    const brightness1 = (r1 * 299 + g1 * 587 + b1 * 114) / 1000;
+    const brightness2 = (r2 * 299 + g2 * 587 + b2 * 114) / 1000;
+    
+    return Math.abs(brightness1 - brightness2) / 255 * 21; // Approximation
+  }
+}
+
+// Supporting interfaces
+export interface BrandingPreview {
+  colorSwatches: {
+    primary: string;
+    secondary: string;
+  };
+  fontSamples: {
+    header: {
+      font: string;
+      sample: string;
+    };
+    body: {
+      font: string;
+      sample: string;
+    };
+  };
+  logoPlacement: string | null;
+  footer: string;
+}
+
+export interface ValidationResult {
+  isValid: boolean;
+  errors: string[];
+  warnings: string[];
+}
+
+// Singleton instance
+export const brandingManager = new BrandingManager();

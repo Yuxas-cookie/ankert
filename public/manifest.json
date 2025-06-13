@@ -1,0 +1,45 @@
+{
+  "name": "Survey App - 宇宙的アンケート管理",
+  "short_name": "Survey App",
+  "description": "Apple iPhone 16 Pro風の宇宙的デザインを採用した最先端のアンケート作成・管理アプリケーション",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#5E5CE6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "label": "ダッシュボード"
+    },
+    {
+      "src": "/screenshots/survey-builder.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "label": "アンケート作成"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "lang": "ja-JP",
+  "dir": "ltr"
+}
